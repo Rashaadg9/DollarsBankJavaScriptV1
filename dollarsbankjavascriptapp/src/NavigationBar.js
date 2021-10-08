@@ -38,7 +38,7 @@ export const NavigationBar = () => (
 
   <Styles>
     <Navbar expand="lg">
-      <Navbar.Brand href="/">Home</Navbar.Brand>
+      <Navbar.Brand href="/userHome">Home</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       {/* <Form className="form-center">
         <FormControl type="text" placeholder="Search Name" className="" />

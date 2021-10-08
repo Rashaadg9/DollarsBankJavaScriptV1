@@ -5,6 +5,11 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 
 export default function UserHome() {
+    if( (localStorage.getItem("id") == -1) || (localStorage.getItem("id") == undefined ))
+    {
+        let url = "/";
+        window.location.href = url;
+    }
     const [name, setName] = useState(localStorage.getItem("name"));
     const [id, setId] = useState(localStorage.getItem("id"));
     const [user, setUser] = useState([]);
@@ -31,7 +36,7 @@ export default function UserHome() {
                       <td><a href="/deposit">Make Deposit</a></td>
                   </tr>
                   <tr>
-                      <td>Make Withdrawal</td>
+                      <td><a href="/withdrawal">Make Withdrawal</a></td>
                   </tr>
                   <tr>
                       <td>Transfer Funds</td>

@@ -13,7 +13,8 @@ const GridWrapper = styled.div`
 `;
 
 export const Home = (props) => (
-  <div>
     
+  <div>
+    <h1>Test</h1>
   </div> 
 )
