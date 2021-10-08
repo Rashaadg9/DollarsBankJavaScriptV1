@@ -5,6 +5,8 @@ import { NavigationBar } from "./NavigationBar";
 import { Home } from "./Home"
 import { LoginForm } from "./LogIn";
 import CreateAccount from "./createAccount";
+import UserHome from "./UserHome";
+import DepositForm from "./Deposit";
 
 class App extends Component {
   render() {
@@ -17,6 +19,8 @@ class App extends Component {
             <Route exact path="/" component={Home} />
             <Route path="/login" component={LoginForm} />
             <Route path="/newAccount" component={CreateAccount} />
+            <Route path="/userHome" component={UserHome} />
+            <Route path="/deposit" component={DepositForm} />
           </Switch>
         </Router>
       </React.Fragment>

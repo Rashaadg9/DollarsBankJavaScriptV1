@@ -9,6 +9,8 @@ export const LoginForm = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState([]);
+  localStorage.setItem("id", -1);
+  localStorage.setItem("name", -1);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -19,9 +21,19 @@ export const LoginForm = (props) => {
     axios.post(API_URL, {"username": username, "password": password}, {headers: {"Content-Type": "application/json"}} ).then((res) => {
       const result = res.data;
       setUser(result);
+
+      localStorage.setItem("id", result.userId);
+      localStorage.setItem("name", result.firstName);
     });
 
     console.log(user);
+    console.log(localStorage.getItem("id"));
+    console.log(localStorage.getItem("name"));
+    if(localStorage.getItem("id") != -1)
+  {
+    let url = "/userHome";
+    window.location.href = url;
+  }
     // fetch("http://localhost:8080/user/login", {
     //   method: "GET",
     //   headers: {
