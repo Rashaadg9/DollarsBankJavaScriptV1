@@ -53,6 +53,10 @@ export const NavigationBar = () => (
             <Nav.Link href="/newAccount">Create Account</Nav.Link>
           </Nav.Item>
 
+          <Nav.Item>
+            <Nav.Link href="/account">MyInfo</Nav.Link>
+          </Nav.Item>
+
         </Nav>
       </Navbar.Collapse>
     </Navbar>
