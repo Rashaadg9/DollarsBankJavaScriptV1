@@ -39,7 +39,7 @@ export default function UserHome() {
                       <td><a href="/withdrawal">Make Withdrawal</a></td>
                   </tr>
                   <tr>
-                      <td>Transfer Funds</td>
+                      <td><a href="/transfer">Transfer Funds</a></td>
                   </tr>
                   <tr>
                       <td>View 5 Recent Transactions</td>
