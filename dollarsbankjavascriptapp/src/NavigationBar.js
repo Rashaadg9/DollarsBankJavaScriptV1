@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Nav, Navbar, Form, FormControl } from "react-bootstrap";
 import styled from "styled-components";
 
@@ -28,14 +28,34 @@ const Styles = styled.div`
   }
 `;
 
-export const NavigationBar = () => (
-  // const userId = localStorage.getItem("userId");
-  // const [id, setId] = useState(userId);
+
+export default function NavigationBar() {
+  //const userId = localStorage.getItem("userId");
+  const [logStatus, setLogStatus] = useState("LogIn");
+  const [element, setElement] = useState("");
 
   // var s = `/users/${id}`;
 
   // setId(userId);
+  
+  useEffect(() => {
+    if (localStorage.getItem("id") > 0)
+    {
+      setLogStatus("LogOut");
+      setElement("");
+    }
+    else
+    {
+      setLogStatus("LogIn");
+      setElement(
+        <Nav.Item>
+        <Nav.Link href="/newAccount">Create Account</Nav.Link>
+      </Nav.Item>
+      )
+    }
+  }, []);
 
+return(
   <Styles>
     <Navbar expand="lg">
       <Navbar.Brand href="/userHome">Home</Navbar.Brand>
@@ -46,12 +66,10 @@ export const NavigationBar = () => (
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
           <Nav.Item>
-            <Nav.Link href="/login">Login</Nav.Link>
+            <Nav.Link href="/login">{logStatus}</Nav.Link>
           </Nav.Item>
 
-          <Nav.Item>
-            <Nav.Link href="/newAccount">Create Account</Nav.Link>
-          </Nav.Item>
+          {element}
 
           <Nav.Item>
             <Nav.Link href="/account">MyInfo</Nav.Link>
@@ -61,4 +79,5 @@ export const NavigationBar = () => (
       </Navbar.Collapse>
     </Navbar>
   </Styles>
-);
+)
+    };
