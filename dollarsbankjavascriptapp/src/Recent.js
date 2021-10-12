@@ -4,45 +4,46 @@ import axios from "axios";
 
 import React, { useState, useEffect } from "react";
 
-export default function UserHome() {
+export default function Recent() {
     if( (localStorage.getItem("id") == -1) || (localStorage.getItem("id") == undefined ))
     {
         let url = "/";
         window.location.href = url;
     }
-    const [name, setName] = useState(localStorage.getItem("name"));
     const [id, setId] = useState(localStorage.getItem("id"));
-    const [user, setUser] = useState([]);
+    const [recent, setRecent] = useState([]);
 
     useEffect(() => {
-        const API_URL = "http://localhost:8080/user/" + localStorage.getItem("id");
+        const API_URL = "http://localhost:8080/recent/" + localStorage.getItem("id");
         axios.get(API_URL).then((res) => {
           const result1 = res.data;
-          setUser(result1);
+          setRecent(result1);
         });
       }, []);
-  
+
+      console.log(recent);
   return(
       <div>
-          <h1>Hello {name}</h1>
-
-          <h3>Current Balance: ${user.cash}</h3>
+          <h1>5 Recent Transactions</h1>
 
           <br></br>
 
           <table>
               <tbody>
                   <tr>
-                      <td><a href="/deposit">Make Deposit</a></td>
+                      <td>{recent.r1}</td>
                   </tr>
                   <tr>
-                      <td><a href="/withdrawal">Make Withdrawal</a></td>
+                      <td>{recent.r2}</td>
                   </tr>
                   <tr>
-                      <td><a href="/transfer">Transfer Funds</a></td>
+                      <td>{recent.r3}</td>
                   </tr>
                   <tr>
-                      <td><a href="/recent">View 5 Recent Transactions</a></td>
+                      <td>{recent.r4}</td>
+                  </tr>
+                  <tr>
+                      <td>{recent.r5}</td>
                   </tr>
               </tbody>
           </table>

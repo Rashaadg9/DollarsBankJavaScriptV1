@@ -10,6 +10,7 @@ import DepositForm from "./Deposit";
 import WithdrawalForm from "./Withdrawal";
 import TransferForm from "./Transfer";
 import Account from "./Account";
+import Recent from "./Recent";
 
 class App extends Component {
   render() {
@@ -27,6 +28,7 @@ class App extends Component {
             <Route path="/withdrawal" component={WithdrawalForm} />
             <Route path="/transfer" component={TransferForm} />
             <Route path="/account" component={Account} />
+            <Route path="/recent" component={Recent} />
           </Switch>
         </Router>
       </React.Fragment>
