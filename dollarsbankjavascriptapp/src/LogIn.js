@@ -2,16 +2,28 @@ import logo from './logo.svg';
 import './App.css';
 import axios from "axios";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export const LoginForm = (props) => {
   // const [state, setState] = useState({ username: "", password: "" });
-  const [correct, setCorrect] = useState("");
+  const [correct, setCorrect] = useState(1);
+  const [error, setError] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState([]);
   localStorage.setItem("id", -1);
   localStorage.setItem("name", -1);
+
+  useEffect(() => {
+    if ( correct == 0 ) {
+      setError("Incorrect Username & Password Combination");
+    }
+    else
+    {
+      setError("");
+    }
+
+  }, [correct]);
   
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,7 +34,7 @@ export const LoginForm = (props) => {
     axios.post(API_URL, {"username": username, "password": password}, {headers: {"Content-Type": "application/json"}} ).then((res) => {
       const result = res.data;
       setUser(result);
-
+     
       localStorage.setItem("id", result.userId);
       localStorage.setItem("name", result.firstName);
     });
@@ -32,11 +44,11 @@ export const LoginForm = (props) => {
     console.log(localStorage.getItem("name"));
 
     if ( (localStorage.getItem("id") === 'undefined') ) {
-      setCorrect("Incorrect Username & Password Combination");
+      setCorrect(0);
     }
     else
     {
-      setCorrect("");
+      setCorrect(1);
     }
 
     if(localStorage.getItem("id") > 0)
@@ -67,7 +79,7 @@ export const LoginForm = (props) => {
         <input type="submit" value="Login" />
       </form>
 
-      <h5>{correct}</h5>
+      <h5 style={{ color: 'red' }} >{error}</h5>
 
     </div>
     
