@@ -6,12 +6,13 @@ import React, { useState } from "react";
 
 export const LoginForm = (props) => {
   // const [state, setState] = useState({ username: "", password: "" });
+  const [correct, setCorrect] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState([]);
   localStorage.setItem("id", -1);
   localStorage.setItem("name", -1);
-
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(username);
@@ -29,45 +30,29 @@ export const LoginForm = (props) => {
     console.log(user);
     console.log(localStorage.getItem("id"));
     console.log(localStorage.getItem("name"));
-    if(localStorage.getItem("id") != -1)
+
+    if ( (localStorage.getItem("id") === 'undefined') ) {
+      setCorrect("Incorrect Username & Password Combination");
+    }
+    else
+    {
+      setCorrect("");
+    }
+
+    if(localStorage.getItem("id") > 0)
   {
     let url = "/userHome";
     window.location.href = url;
   }
-    // fetch("http://localhost:8080/user/login", {
-    //   method: "GET",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({ username: username, password: password }),
-    // })
-    //   .then((response) => response.json())
-
-    // localStorage.setItem("username", username);
-    // localStorage.setItem("password", password);
-    // setUsername("");
-    // setPassword("");
-    // localStorage.setItem("token", jwt);
-    // localStorage.setItem("username", username);
-    // e.preventDefault();
-
-    // const API_URL = "http://localhost:8080/users";
-
-    // fetch(API_URL)
-    //   .then((response) => response.json())
-    //   .then((data) => setUsers(data));
-
-    // const user = users.filter(
-    //   (user) => user.username.toLowerCase() === localStorage.getItem("username")
-    // );
-    // const uId = Object.assign({}, user[0]).id;
-    // localStorage.setItem("userId", uId);
-    // console.log(uId);
+ 
   };
 
   return (
     <div className="Login">
-      <h1>Hello User</h1>
+      <h1>Welcome Back!</h1>
+      <h4>Enter LogIn Credentials Below</h4>
+
+      <br></br>
 
       <form onSubmit={handleSubmit} action="/">
         <label>Username:</label>
@@ -82,12 +67,7 @@ export const LoginForm = (props) => {
         <input type="submit" value="Login" />
       </form>
 
-      <div>
-        <h3>Username: {username}</h3>
-        <h3>Password: {password}</h3>
-
-        <h4>{user.userId} {user.cash}</h4>
-      </div>
+      <h5>{correct}</h5>
 
     </div>
     

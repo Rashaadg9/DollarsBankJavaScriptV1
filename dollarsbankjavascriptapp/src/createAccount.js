@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import axios from "axios";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function CreateAccount() {
   const [user, setUser] = useState(
@@ -15,6 +15,25 @@ export default function CreateAccount() {
           "password": "", 
           "cash": ""
       });
+  const [error, setError] = useState("");
+
+    useEffect(() => {
+      const API_URL = "http://localhost:8080/user/check/" + user.username;
+  
+      axios.get(API_URL).then((res) => {
+        const result1 = res.data;
+        console.log(result1);
+        if(result1 > 0)
+        {
+          setError("This username is not avaliable!");
+        }
+        else
+        {
+          setError("");
+        }
+      });
+  
+    }, [user.username]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,7 +43,7 @@ export default function CreateAccount() {
     .then((res) => {
       const result = res.data;
     });
-
+    
     console.log(user);
     // fetch("http://localhost:8080/user/login", {
     //   method: "GET",
@@ -82,11 +101,10 @@ export default function CreateAccount() {
               onChange={handleChange}
               value={user.firstName}
               placeholder="John"
+              required="required"
             ></input>
 
             </div>
-
-            <br />
 
             <div className="mb-3">
 
@@ -99,11 +117,10 @@ export default function CreateAccount() {
               onChange={handleChange}
               value={user.lastName}
               placeholder="Doe"
+              required="required"
             ></input>
 
             </div>
-
-            <br/>
 
             <div className="mb-3">
 
@@ -116,11 +133,11 @@ export default function CreateAccount() {
               onChange={handleChange}
               value={user.contact}
               placeholder="000-000-0000"
+              required="required"
+              pattern="\d{3}-\d{3}-\d{4}"
             ></input>
 
             </div>
-
-            <br />
 
             <div className="mb-3">
 
@@ -133,11 +150,11 @@ export default function CreateAccount() {
               onChange={handleChange}
               value={user.dob}
               placeholder="01/01/0001"
+              required="required"
+              pattern="\d{2}\/\d{2}\/\d{4}"
             ></input>
 
             </div>
-
-            <br />
 
             <div className="mb-3">
 
@@ -149,11 +166,10 @@ export default function CreateAccount() {
               name="username"
               onChange={handleChange}
               value={user.username}
+              required="required"
             ></input>
-
+            <p style={{ color: 'red' }} >{error}</p>
             </div>
-
-            <br />
 
             <div className="mb-3">
 
@@ -164,16 +180,15 @@ export default function CreateAccount() {
               id="password"
               name="password"
               onChange={handleChange}
-              value={user.password}
+              value={user.password.trim()}
+              required="required"
             ></input>
 
             </div>
-            
-            <br />
 
             <div className="mb-3">
 
-            <label htmlFor="cash" className="form-label">Cash: </label>
+            <label htmlFor="cash" className="form-label">Inital Deposit: </label>
             <input
               className="form-control"
               type="number"
@@ -189,7 +204,7 @@ export default function CreateAccount() {
             
             <br />
 
-            <input type="submit" value="Create" />
+            <input type="submit" value="Create" disabled={error?"true":""} />
           </fieldset>
         </form>
     )

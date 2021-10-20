@@ -42,7 +42,11 @@ export default function NavigationBar() {
     if (localStorage.getItem("id") > 0)
     {
       setLogStatus("LogOut");
-      setElement("");
+      setElement(
+        <Nav.Item>
+          <Nav.Link href="/account">MyInfo</Nav.Link>
+        </Nav.Item>
+      );
     }
     else
     {
@@ -70,10 +74,6 @@ return(
           </Nav.Item>
 
           {element}
-
-          <Nav.Item>
-            <Nav.Link href="/account">MyInfo</Nav.Link>
-          </Nav.Item>
 
         </Nav>
       </Navbar.Collapse>

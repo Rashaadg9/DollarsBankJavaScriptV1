@@ -13,7 +13,6 @@ const GridWrapper = styled.div`
 `;
 
 export const Home = (props) => (
-    
   <div>
     <h1>Welcome To Dollars Bank</h1>
   </div> 
