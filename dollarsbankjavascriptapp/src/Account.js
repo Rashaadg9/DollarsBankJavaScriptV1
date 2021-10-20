@@ -49,6 +49,9 @@ export default function Account() {
                   </tr>
               </tbody>
           </table>
+
+          <br></br><br></br><br></br>
+          <a href="/deleteAccount" style={{ color: 'red' }} >Delete Account</a>
       </div>
   )
 };
