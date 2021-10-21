@@ -30,7 +30,6 @@ export const TransferForm = (props) => {
   }, []);
 
   const handleSubmit = (e) => {
-    e.preventDefault();
     const API_URL = "http://localhost:8080/user/check/" + userTo;
     const API_URL2 = "http://localhost:8080/user/transfer";
     const API_URL3 = "http://localhost:8080/recent/update";
@@ -78,7 +77,7 @@ export const TransferForm = (props) => {
     <div className="Deposit">
       <h1>Current Balance: ${userFrom.cash}</h1>
 
-      <form onSubmit={handleSubmit} action="/">
+      <form onSubmit={handleSubmit} action="/transfer">
         <label>Enter username to transfer to</label>
         <input type="text" id="userTo" name="userTo" onChange={(event) => setUserTo(event.target.value)} value={userTo}></input>
 
